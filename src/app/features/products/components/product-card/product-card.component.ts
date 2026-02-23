@@ -9,23 +9,33 @@ import { CartService } from '../../../../core/services/cart.service';
   imports: [CommonModule, CurrencyPipe],
   template: `
     <div class="group relative flex flex-col gap-4">
-      <div class="relative aspect-[3/4] w-full overflow-hidden rounded-lg bg-surface-dark">
-        <!-- Image -->
+      <div class="relative aspect-[3/4] w-full overflow-hidden rounded-lg bg-background-dark/50">
+        <!-- Ambient Background -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+          <img
+            [src]="product.thumbnail"
+            class="h-full w-full object-cover blur-3xl opacity-40 scale-150 transition-transform duration-1000 group-hover:scale-[1.7]"
+            alt=""
+          />
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-background-dark/20 to-background-dark/60"></div>
+        </div>
+
+        <!-- Main Image -->
         <img
           [src]="product.thumbnail"
           [alt]="product.title"
-          class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          class="relative h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 z-10"
         />
         
         <!-- Badge -->
-        <div *ngIf="product.discountPercentage > 10" class="absolute top-4 left-4">
+        <div *ngIf="product.discountPercentage > 10" class="absolute top-4 left-4 z-20">
           <span class="px-2 py-1 bg-primary text-background-dark text-[10px] uppercase font-bold tracking-widest rounded-sm">
             -{{ product.discountPercentage | number:'1.0-0' }}%
           </span>
         </div>
 
         <!-- Hover Action Overlay -->
-        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-30">
           <button 
             (click)="addToCart($event)"
             class="translate-y-4 group-hover:translate-y-0 transition-all duration-300 bg-white text-background-dark font-bold text-xs uppercase tracking-widest px-6 py-3 rounded hover:bg-primary shadow-lg hover:shadow-primary/50"

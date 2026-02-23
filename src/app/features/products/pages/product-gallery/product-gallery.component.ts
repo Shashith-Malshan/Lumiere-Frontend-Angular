@@ -370,7 +370,7 @@ export class ProductGalleryComponent implements OnInit {
   private categoryMap: Record<string, string[]> = {
     'Apparel': ['mens-shirts', 'womens-dresses', 'tops'],
     'Shoes': ['womens-shoes', 'mens-shoes'],
-    'Bags': ['womens-bags', 'fragrances'],
+    'Bags': ['Bags'],
     'Accessories': ['sunglasses', 'mens-watches', 'womens-watches', 'womens-jewellery']
   };
 
@@ -438,15 +438,17 @@ export class ProductGalleryComponent implements OnInit {
       next: (data: Product[]) => {
         // Procedurally transform fragrances into luxury bags
         const transformedData = data.map(p => {
-          if (p.category === 'fragrances') {
+          if (p.category === 'fragrances' || p.category === 'womens-bags') {
+            const isFragrance = p.category === 'fragrances';
             const assetIndex = p.id % this.BAG_ASSETS.length;
             const asset = this.BAG_ASSETS[assetIndex];
+
             return {
               ...p,
-              title: asset.title,
-              category: 'Bags', // Change category label to Bags
-              thumbnail: asset.image,
-              images: [asset.image]
+              title: isFragrance ? asset.title : p.title,
+              category: 'Bags',
+              thumbnail: isFragrance ? asset.image : p.thumbnail,
+              images: isFragrance ? [asset.image] : p.images
             };
           }
           return p;
