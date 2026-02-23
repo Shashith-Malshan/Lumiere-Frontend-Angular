@@ -273,11 +273,6 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
             </div>
           }
 
-          <div *ngIf="navState() === 'collections'" class="mt-20 flex justify-center">
-            <button class="px-8 py-3 text-white border border-white/20 rounded-full hover:bg-white hover:text-background-dark transition-all text-sm font-bold uppercase tracking-widest">
-              Load More Products
-            </button>
-          </div>
         </section>
 
         <!-- Newsletter Section -->
@@ -376,7 +371,7 @@ export class ProductGalleryComponent implements OnInit {
     'Apparel': ['mens-shirts', 'womens-dresses', 'tops'],
     'Shoes': ['womens-shoes', 'mens-shoes'],
     'Bags': ['womens-bags'],
-    'Accessories': ['sunglasses']
+    'Accessories': ['sunglasses', 'mens-watches', 'womens-watches', 'womens-jewellery']
   };
 
   filteredProducts = computed(() => {
