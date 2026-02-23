@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #eebd2b;
+
+    --color-background-base: var(--bg);
+    --color-surface-base: var(--surface);
+    --color-text-base: var(--text);
+
+    --font-display: "Playfair Display", serif;
+    --font-sans: "Inter", sans-serif;
+
+    --radius-default: 0.25rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+
+    --background-image-gold-gradient: linear-gradient(135deg, #eebd2b 0%, #b88a1b 100%);
+
+    --animate-fade-in-up: fadeInUp 1s ease-out forwards;
+    --animate-shimmer: shimmer 1.5s infinite;
+    --animate-marquee: marquee 30s linear infinite;
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes shimmer {
+        0% {
+            transform: translateX(-150%) skewX(-12deg);
+        }
+
+        100% {
+            transform: translateX(150%) skewX(-12deg);
+        }
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+}
+
+:root {
+    --primary: #eebd2b;
+    --bg: #f8f7f6;
+    --surface: #ffffff;
+    --text: #181611;
+    --text-muted: rgba(24, 22, 17, 0.4);
+    --border: rgba(24, 22, 17, 0.05);
+}
+
+:root.dark {
+    --bg: #181611;
+    --surface: #221d16;
+    --text: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.4);
+    --border: rgba(255, 255, 255, 0.05);
+}
+
+:root.christmas {
+    --primary: #C41E3A;
+    /* Christmas Red */
+    --bg: #f8f8f8;
+    --surface: #ffffff;
+    --text: #181611;
+    /* Neutral Black for Product Details */
+    --text-muted: rgba(24, 22, 17, 0.4);
+    --border: rgba(196, 30, 58, 0.1);
+}
+
+:root.christmas.dark {
+    --bg: #0a110d;
+    /* Deep Forest */
+    --surface: #121d16;
+    --text: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.4);
+    --border: rgba(196, 30, 58, 0.15);
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh) translateX(20px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar for a premium feel */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 4px;
+    border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+.glass-panel {
+    background: color-mix(in srgb, var(--bg) 70%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
