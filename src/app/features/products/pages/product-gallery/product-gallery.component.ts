@@ -212,14 +212,14 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
         <!-- Product Gallery Section -->
         <section *ngIf="navState() !== 'editorial'" class="p-6 md:p-12 lg:p-24 max-w-[1600px] mx-auto">
           <!-- Filter / Breadcrumbs -->
-          <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-white/5 pb-6">
+          <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-surface-base/10 pb-6">
             <div>
-              <div class="flex items-center gap-2 text-sm text-white/40 mb-2">
+              <div class="flex items-center gap-2 text-sm text-text-base/40 mb-2">
                 <a class="hover:text-primary transition-colors cursor-pointer" (click)="setNav('collections', $event)">Home</a>
                 <span>/</span>
                 <span class="text-primary">{{ navState() === 'new-arrivals' ? 'New Arrivals' : selectedCategory() }}</span>
               </div>
-              <h2 class="text-3xl md:text-4xl font-display text-white">
+              <h2 class="text-3xl md:text-4xl font-display text-text-base">
                 {{ navState() === 'new-arrivals' ? 'New Arrivals' : (selectedCategory() === 'All Items' ? 'Curated Collection' : selectedCategory()) }}
               </h2>
             </div>
@@ -230,7 +230,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
                   (click)="setCategory(cat)"
                   [class]="cat === selectedCategory() 
                     ? 'px-5 py-2 rounded-full border border-primary/50 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest whitespace-nowrap transition-all'
-                    : 'px-5 py-2 rounded-full border border-white/10 hover:border-white/30 text-white/60 hover:text-white text-xs font-medium uppercase tracking-widest whitespace-nowrap transition-all'"
+                    : 'px-5 py-2 rounded-full border border-surface-base/10 hover:border-surface-base/30 text-text-base/60 hover:text-text-base text-xs font-medium uppercase tracking-widest whitespace-nowrap transition-all'"
                 >
                   {{ cat }}
                 </button>
@@ -240,10 +240,10 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
 
           <!-- Error State -->
           @if (error()) {
-            <div class="text-center py-20 bg-surface-dark/50 rounded-2xl border border-white/5">
-              <span class="material-symbols-outlined !text-[48px] text-zinc-700 mb-4">error</span>
-              <h4 class="text-xl font-display text-white mb-2">A momentary interruption</h4>
-              <p class="text-white/40 mb-6">{{ error() }}</p>
+            <div class="text-center py-20 bg-surface-base/5 rounded-2xl border border-surface-base/10">
+              <span class="material-symbols-outlined !text-[48px] text-text-base/20 mb-4">error</span>
+              <h4 class="text-xl font-display text-text-base mb-2">A momentary interruption</h4>
+              <p class="text-text-base/40 mb-6">{{ error() }}</p>
               <button (click)="loadProducts()" class="text-primary uppercase tracking-widest text-xs font-bold hover:underline">Try Again</button>
             </div>
           }
@@ -254,12 +254,12 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
             @if (isLoading()) {
               @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
                 <div class="relative flex flex-col gap-3 animate-pulse">
-                  <div class="relative aspect-[3/4] w-full overflow-hidden rounded-lg bg-white/5">
-                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 translate-x-[-150%] animate-shimmer"></div>
+                  <div class="relative aspect-[3/4] w-full overflow-hidden rounded-lg bg-surface-base/10">
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-text-base/5 to-transparent skew-x-12 translate-x-[-150%] animate-shimmer"></div>
                   </div>
                   <div class="flex flex-col gap-2">
-                    <div class="h-4 w-3/4 bg-white/10 rounded"></div>
-                    <div class="h-3 w-1/4 bg-white/10 rounded"></div>
+                    <div class="h-4 w-3/4 bg-surface-base/20 rounded"></div>
+                    <div class="h-3 w-1/4 bg-surface-base/20 rounded"></div>
                   </div>
                 </div>
               }
@@ -273,14 +273,14 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
 
           @if (filteredProducts().length === 0 && !isLoading()) {
             <div class="text-center py-20">
-              <p class="text-white/40 italic">No pieces found in this collection currently.</p>
+              <p class="text-text-base/40 italic">No pieces found in this collection currently.</p>
             </div>
           }
 
         </section>
 
         <!-- Newsletter Section -->
-        <section class="py-24 bg-surface-dark border-t border-white/5">
+        <section class="py-24 bg-surface-base/5 border-t border-surface-base/10">
           <div class="max-w-4xl mx-auto px-6 text-center">
             <span class="material-symbols-outlined !text-[48px] text-primary mb-6">mark_email_read</span>
             <h2 class="text-3xl md:text-5xl font-display text-text-base mb-4">Join the Inner Circle</h2>
