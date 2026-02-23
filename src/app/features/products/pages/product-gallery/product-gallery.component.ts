@@ -168,7 +168,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
             </div>
             <div class="relative z-10 flex h-full flex-col justify-center px-6 md:px-12 lg:px-24 max-w-[1440px] mx-auto">
               <div class="max-w-2xl animate-fade-in-up">
-                <span class="text-primary text-sm font-bold uppercase tracking-[0.2em] mb-4 block">New Season 2024</span>
+                <span class="text-primary text-sm font-bold uppercase tracking-[0.2em] mb-4 block">New Season 2026</span>
                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-medium leading-[1.1] mb-6 transition-colors" [class.text-primary]="themeService.isChristmasMode()" [class.text-text-base]="!themeService.isChristmasMode()">
                   {{ themeService.isChristmasMode() ? 'Festive' : (navState() === 'new-arrivals' ? 'Fresh' : 'Divine') }} <br/>
                   <span class="italic font-light" [class.text-text-base/90]="!themeService.isChristmasMode()" [class.text-primary/80]="themeService.isChristmasMode()">{{ themeService.isChristmasMode() ? 'Magic' : (navState() === 'new-arrivals' ? 'arrivals' : 'Elegance') }}</span>
