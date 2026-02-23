@@ -37,7 +37,23 @@ export class ProductService {
     getProducts(): Observable<Product[]> {
         return this.http.get<ProductResponse>('https://dummyjson.com/products?limit=100').pipe(
             map(response => {
-                const apiProducts = response.products.filter(p => this.categories.includes(p.category));
+                const apiProducts = response.products
+                    .filter(p => this.categories.includes(p.category))
+                    .map(p => {
+                        if (p.category === 'fragrances') {
+                            const bagImages = [
+                                'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000&auto=format&fit=crop',
+                                'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=1000&auto=format&fit=crop',
+                                'https://images.unsplash.com/photo-1591561954557-26941169b49e?q=80&w=1000&auto=format&fit=crop',
+                                'https://images.unsplash.com/photo-1566150905458-1bf1fd113961?q=80&w=1000&auto=format&fit=crop',
+                                'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=1000&auto=format&fit=crop'
+                            ];
+                            // Deterministic image based on ID
+                            p.thumbnail = bagImages[p.id % bagImages.length];
+                            p.images = [p.thumbnail];
+                        }
+                        return p;
+                    });
                 const customProducts = JSON.parse(localStorage.getItem(this.customProductsKey) || '[]');
                 const deletedIds = JSON.parse(localStorage.getItem(this.deletedProductsKey) || '[]');
 
