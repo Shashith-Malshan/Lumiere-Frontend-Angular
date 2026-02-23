@@ -18,10 +18,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
         <header class="flex items-center justify-between px-6 py-4 max-w-[1440px] mx-auto w-full">
           <!-- Brand -->
           <div class="flex items-center gap-8">
-            <a class="flex items-center gap-3 text-white group" href="#" (click)="setNav('collections', $event)">
-              <div class="size-6 text-primary transition-transform group-hover:rotate-45 duration-500">
-                <span class="material-symbols-outlined !text-[24px]">diamond</span>
-              </div>
+            <a class="flex items-center text-white group" href="#" (click)="setNav('collections', $event)">
               <h2 class="text-white text-2xl font-display font-bold tracking-[0.05em]">AURELIA</h2>
             </a>
             <!-- Desktop Nav Links -->
