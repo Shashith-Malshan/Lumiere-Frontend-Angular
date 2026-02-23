@@ -203,6 +203,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
              <span class="material-symbols-outlined !text-[500px]">auto_awesome</span>
            </div>
         </section>
+        }
 
         <!-- Product Gallery Section -->
         <section *ngIf="navState() !== 'editorial'" class="p-6 md:p-12 lg:p-24 max-w-[1600px] mx-auto">
