@@ -406,7 +406,7 @@ export class ProductGalleryComponent implements OnInit {
   };
 
   filteredProducts = computed(() => {
-    let list = this.products();
+    let list = this.products().filter(p => p.isVisible);
     const nav = this.navState();
     const category = this.selectedCategory();
 

@@ -14,6 +14,7 @@ export interface Product {
     category: string;
     thumbnail: string;
     images: string[];
+    isVisible?: boolean;
 }
 
 export interface ProductResponse {
@@ -32,7 +33,7 @@ export class ProductService {
     private categories = ['mens-shirts', 'womens-dresses', 'tops', 'womens-shoes', 'mens-shoes', 'womens-bags', 'sunglasses', 'mens-watches', 'womens-watches', 'womens-jewellery', 'fragrances'];
 
     private customProductsKey = 'lumiere_custom_products';
-    private deletedProductsKey = 'lumiere_deleted_products';
+    private hiddenProductsKey = 'lumiere_hidden_products';
 
     getProducts(): Observable<Product[]> {
         return this.http.get<ProductResponse>('https://dummyjson.com/products?limit=100').pipe(
@@ -55,10 +56,13 @@ export class ProductService {
                         return p;
                     });
                 const customProducts = JSON.parse(localStorage.getItem(this.customProductsKey) || '[]');
-                const deletedIds = JSON.parse(localStorage.getItem(this.deletedProductsKey) || '[]');
+                const hiddenIds = JSON.parse(localStorage.getItem(this.hiddenProductsKey) || '[]');
 
-                // Merge and filter deleted
-                return [...customProducts, ...apiProducts].filter(p => !deletedIds.includes(p.id));
+                // Merge and map visibility
+                return [...customProducts, ...apiProducts].map(p => ({
+                    ...p,
+                    isVisible: !hiddenIds.includes(p.id)
+                }));
             })
         );
     }
@@ -79,17 +83,16 @@ export class ProductService {
         localStorage.setItem(this.customProductsKey, JSON.stringify(customProducts));
     }
 
-    deleteProduct(id: number) {
-        // Handle custom products
-        const customProducts = JSON.parse(localStorage.getItem(this.customProductsKey) || '[]');
-        const filteredCustom = customProducts.filter((p: Product) => p.id !== id);
-        localStorage.setItem(this.customProductsKey, JSON.stringify(filteredCustom));
+    toggleVisibility(id: number) {
+        const hiddenIds = JSON.parse(localStorage.getItem(this.hiddenProductsKey) || '[]');
+        const index = hiddenIds.indexOf(id);
 
-        // Track deleted API products
-        const deletedIds = JSON.parse(localStorage.getItem(this.deletedProductsKey) || '[]');
-        if (!deletedIds.includes(id)) {
-            deletedIds.push(id);
-            localStorage.setItem(this.deletedProductsKey, JSON.stringify(deletedIds));
+        if (index > -1) {
+            hiddenIds.splice(index, 1); // Make visible
+        } else {
+            hiddenIds.push(id); // Hide
         }
+
+        localStorage.setItem(this.hiddenProductsKey, JSON.stringify(hiddenIds));
     }
 }

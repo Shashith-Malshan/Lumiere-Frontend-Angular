@@ -104,10 +104,13 @@ import { ThemeService } from '../../../../core/services/theme.service';
                     </td>
                     <td class="px-6 py-4 text-right">
                       <button 
-                        (click)="deleteProduct(product.id)"
-                        class="text-text-base/20 hover:text-red-500 transition-colors p-2"
+                        (click)="toggleVisibility(product.id)"
+                        class="text-text-base/20 hover:text-primary transition-colors p-2"
+                        [title]="product.isVisible ? 'Hide from Store' : 'Show on Store'"
                       >
-                        <span class="material-symbols-outlined !text-[20px]">delete</span>
+                        <span class="material-symbols-outlined !text-[20px]">
+                          {{ product.isVisible ? 'visibility' : 'visibility_off' }}
+                        </span>
                       </button>
                     </td>
                   </tr>
@@ -227,11 +230,9 @@ export class AdminDashboardComponent implements OnInit {
     this.loadProducts();
   }
 
-  deleteProduct(id: number) {
-    if (confirm('Are you sure you want to remove this piece from the collection?')) {
-      this.productService.deleteProduct(id);
-      this.loadProducts();
-    }
+  toggleVisibility(id: number) {
+    this.productService.toggleVisibility(id);
+    this.loadProducts();
   }
 
   logout() {
