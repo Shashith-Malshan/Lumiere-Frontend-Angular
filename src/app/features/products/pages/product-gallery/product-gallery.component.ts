@@ -457,7 +457,6 @@ export class ProductGalleryComponent implements OnInit {
     this.navState.set('collections');
     this.selectedCategory.set(category);
     this.currentPage.set(0);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   toggleCart() {
@@ -474,12 +473,10 @@ export class ProductGalleryComponent implements OnInit {
 
   nextPage() {
     this.currentPage.update(p => p + 1);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   prevPage() {
     this.currentPage.update(p => Math.max(0, p - 1));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   private readonly BAG_ASSETS = [
