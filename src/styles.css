@@ -73,11 +73,11 @@
 :root.christmas {
     --primary: #C41E3A;
     /* Christmas Red */
-    --bg: #fdfdfd;
+    --bg: #f8f8f8;
     --surface: #ffffff;
-    --text: #1a472a;
-    /* Deep Evergreem */
-    --text-muted: rgba(26, 71, 42, 0.4);
+    --text: #181611;
+    /* Neutral Black for Product Details */
+    --text-muted: rgba(24, 22, 17, 0.4);
     --border: rgba(196, 30, 58, 0.1);
 }
 

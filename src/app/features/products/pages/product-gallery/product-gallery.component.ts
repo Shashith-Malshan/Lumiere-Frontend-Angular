@@ -22,8 +22,8 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
       <div class="fixed top-0 left-0 right-0 z-50 glass-panel transition-all duration-300">
         <header class="flex items-center justify-between px-6 py-4 max-w-[1440px] mx-auto w-full">
                 <div class="flex items-center gap-8">
-            <a class="flex items-center text-text-base group" href="#" (click)="setNav('collections', $event)">
-              <h2 class="text-text-base text-2xl font-display font-bold tracking-[0.05em]">AURELIA</h2>
+            <a class="flex items-center group" href="#" (click)="setNav('collections', $event)">
+              <h2 class="text-2xl font-display font-bold tracking-[0.05em] transition-colors" [class.text-primary]="themeService.isChristmasMode()" [class.text-text-base]="!themeService.isChristmasMode()">AURELIA</h2>
             </a>
             <!-- Desktop Nav Links -->
             <nav class="hidden md:flex items-center gap-8 ml-8">
@@ -169,9 +169,9 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
             <div class="relative z-10 flex h-full flex-col justify-center px-6 md:px-12 lg:px-24 max-w-[1440px] mx-auto">
               <div class="max-w-2xl animate-fade-in-up">
                 <span class="text-primary text-sm font-bold uppercase tracking-[0.2em] mb-4 block">New Season 2024</span>
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-medium text-text-base leading-[1.1] mb-6">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-medium leading-[1.1] mb-6 transition-colors" [class.text-primary]="themeService.isChristmasMode()" [class.text-text-base]="!themeService.isChristmasMode()">
                   {{ themeService.isChristmasMode() ? 'Festive' : (navState() === 'new-arrivals' ? 'Fresh' : 'Divine') }} <br/>
-                  <span class="italic text-text-base/90 font-light">{{ themeService.isChristmasMode() ? 'Magic' : (navState() === 'new-arrivals' ? 'arrivals' : 'Elegance') }}</span>
+                  <span class="italic font-light" [class.text-text-base/90]="!themeService.isChristmasMode()" [class.text-primary/80]="themeService.isChristmasMode()">{{ themeService.isChristmasMode() ? 'Magic' : (navState() === 'new-arrivals' ? 'arrivals' : 'Elegance') }}</span>
                 </h1>
                 <p class="text-lg md:text-xl text-text-base/70 font-light max-w-md mb-10 leading-relaxed">
                   Experience the pinnacle of fashion artistry. Curated for those who command presence and celebrate sophistication.
@@ -246,7 +246,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
                 <span>/</span>
                 <span class="text-primary">{{ navState() === 'new-arrivals' ? 'New Arrivals' : selectedCategory() }}</span>
               </div>
-              <h2 class="text-3xl md:text-4xl font-display text-text-base">
+              <h2 class="text-3xl md:text-4xl font-display transition-colors" [class.text-primary]="themeService.isChristmasMode()" [class.text-text-base]="!themeService.isChristmasMode()">
                 {{ navState() === 'new-arrivals' ? 'New Arrivals' : (selectedCategory() === 'All Items' ? 'Curated Collection' : selectedCategory()) }}
               </h2>
             </div>
@@ -310,7 +310,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
         <section class="py-24 bg-surface-base/5 border-t border-surface-base/10">
           <div class="max-w-4xl mx-auto px-6 text-center">
             <span class="material-symbols-outlined !text-[48px] text-primary mb-6">mark_email_read</span>
-            <h2 class="text-3xl md:text-5xl font-display text-text-base mb-4">Join the Inner Circle</h2>
+            <h2 class="text-3xl md:text-5xl font-display mb-4 transition-colors" [class.text-primary]="themeService.isChristmasMode()" [class.text-text-base]="!themeService.isChristmasMode()">Join the Inner Circle</h2>
             <p class="text-text-base/60 mb-8 max-w-lg mx-auto">Subscribe to receive updates, access to exclusive deals, and more.</p>
             <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input class="flex-1 bg-surface-base/5 border border-surface-base/10 rounded-lg px-4 py-3 text-text-base placeholder-text-base/30 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Enter your email" type="email"/>
