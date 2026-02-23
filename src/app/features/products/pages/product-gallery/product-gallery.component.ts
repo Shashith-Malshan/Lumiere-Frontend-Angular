@@ -279,20 +279,16 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-x-6 gap-y-10">
             <!-- Skeleton Loading State -->
             @if (isLoading()) {
-              @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
-                <div class="relative flex flex-col gap-3 animate-pulse">
-                  <div class="relative aspect-[3/4] w-full overflow-hidden rounded-lg bg-surface-base/10">
-                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-text-base/5 to-transparent skew-x-12 translate-x-[-150%] animate-shimmer"></div>
-                  </div>
-                  <div class="flex flex-col gap-2">
-                    <div class="h-4 w-3/4 bg-surface-base/20 rounded"></div>
-                    <div class="h-3 w-1/4 bg-surface-base/20 rounded"></div>
-                  </div>
+              @for (i of [1,2,3,4,5,6,7,8,9,10]; track i) {
+                <div class="animate-pulse flex flex-col gap-4">
+                  <div class="aspect-[3/4] bg-surface-base/5 rounded-lg border border-surface-base/5"></div>
+                  <div class="h-4 bg-surface-base/5 rounded w-3/4"></div>
+                  <div class="h-4 bg-surface-base/5 rounded w-1/4"></div>
                 </div>
               }
             } @else {
               <!-- Product Cards Grid -->
-              @for (product of filteredProducts(); track product.id) {
+              @for (product of paginatedProducts(); track product.id) {
                 <app-product-card [product]="product" class="animate-fade-in-up" [style.animation-delay]="($index % 10 * 50) + 'ms'"></app-product-card>
               }
             }
@@ -303,6 +299,26 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
               <p class="text-text-base/40 italic">No pieces found in this collection currently.</p>
             </div>
           }
+
+          <!-- Pagination Controls -->
+          <div *ngIf="!isLoading() && (hasMore() || currentPage() > 0)" class="mt-20 flex justify-center items-center gap-8 border-t border-surface-base/10 pt-12">
+            <button 
+              *ngIf="currentPage() > 0"
+              (click)="prevPage()" 
+              class="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-text-base/40 hover:text-primary transition-all"
+            >
+              <span class="material-symbols-outlined !text-[18px] transition-transform group-hover:-translate-x-1">arrow_back</span>
+              Previous
+            </button>
+            <button 
+              *ngIf="hasMore()"
+              (click)="nextPage()" 
+              class="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-text-base/40 hover:text-primary transition-all"
+            >
+              Next
+              <span class="material-symbols-outlined !text-[18px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+            </button>
+          </div>
 
         </section>
 
@@ -367,20 +383,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
       </main>
     </div>
   `,
-  styles: [`
-    :host { display: block; }
-    .animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; }
-    
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  `]
-})
-export class ProductGalleryComponent implements OnInit {
+  export class ProductGalleryComponent implements OnInit {
   private productService = inject(ProductService);
   private cartService = inject(CartService);
   public themeService = inject(ThemeService);
@@ -391,12 +394,14 @@ export class ProductGalleryComponent implements OnInit {
   selectedCategory = signal<string>('All Items');
   navState = signal<NavState>('collections');
   isCartOpen = signal<boolean>(false);
+  currentPage = signal<number>(0);
+  pageSize = 10;
 
   cartItems = this.cartService.items;
   cartCount = this.cartService.count;
   cartTotal = this.cartService.total;
 
-  UI_CATEGORIES = ['All Items', 'Apparel', 'Shoes', 'Bags', 'Accessories'];
+  UI_CATEGORIES =['All Items', 'Apparel', 'Shoes', 'Bags', 'Accessories'];
 
   private categoryMap: Record<string, string[]> = {
     'Apparel': ['mens-shirts', 'womens-dresses', 'tops'],
@@ -415,13 +420,23 @@ export class ProductGalleryComponent implements OnInit {
     }
 
     if (nav === 'editorial') {
-      return []; // Editorial view has its own content
+      return [];
     }
 
     if (category === 'All Items') return list;
 
     const apiCategories = this.categoryMap[category] || [];
     return list.filter(p => apiCategories.includes(p.category));
+  });
+
+  paginatedProducts = computed(() => {
+    const list = this.filteredProducts();
+    const start = this.currentPage() * this.pageSize;
+    return list.slice(start, start + this.pageSize);
+  });
+
+  hasMore = computed(() => {
+    return (this.currentPage() + 1) * this.pageSize < this.filteredProducts().length;
   });
 
   ngOnInit() {
@@ -431,6 +446,7 @@ export class ProductGalleryComponent implements OnInit {
   setNav(state: NavState, event?: Event) {
     if (event) event.preventDefault();
     this.navState.set(state);
+    this.currentPage.set(0);
     if (state !== 'collections') {
       this.selectedCategory.set('All Items');
     }
@@ -439,6 +455,8 @@ export class ProductGalleryComponent implements OnInit {
   setCategory(category: string) {
     this.navState.set('collections');
     this.selectedCategory.set(category);
+    this.currentPage.set(0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   toggleCart() {
@@ -453,7 +471,17 @@ export class ProductGalleryComponent implements OnInit {
     this.cartService.updateQuantity(id, qty);
   }
 
-  private readonly BAG_ASSETS = [
+  nextPage() {
+    this.currentPage.update(p => p + 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  prevPage() {
+    this.currentPage.update(p => Math.max(0, p - 1));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  private readonly BAG_ASSETS =[
     { title: 'Signature Leather Tote', image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=1000' },
     { title: 'Classic Quilted Flap', image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=1000' },
     { title: 'Minimalist Bucket Bag', image: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?q=80&w=1000' },
@@ -467,7 +495,6 @@ export class ProductGalleryComponent implements OnInit {
 
     this.productService.getProducts().subscribe({
       next: (data: Product[]) => {
-        // Procedurally transform fragrances into luxury bags
         const transformedData = data.map(p => {
           if (p.category === 'fragrances' || p.category === 'womens-bags') {
             const isFragrance = p.category === 'fragrances';
@@ -495,3 +522,4 @@ export class ProductGalleryComponent implements OnInit {
     });
   }
 }
+
