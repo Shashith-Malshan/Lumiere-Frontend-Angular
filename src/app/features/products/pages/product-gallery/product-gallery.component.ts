@@ -17,8 +17,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
       <!-- Navigation -->
       <div class="fixed top-0 left-0 right-0 z-50 glass-panel transition-all duration-300">
         <header class="flex items-center justify-between px-6 py-4 max-w-[1440px] mx-auto w-full">
-          <!-- Brand -->
-          <div class="flex items-center gap-8">
+                <div class="flex items-center gap-8">
             <a class="flex items-center text-text-base group" href="#" (click)="setNav('collections', $event)">
               <h2 class="text-text-base text-2xl font-display font-bold tracking-[0.05em]">AURELIA</h2>
             </a>
@@ -27,28 +26,28 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
               <a 
                 class="hover:text-primary text-xs font-medium uppercase tracking-widest transition-colors cursor-pointer"
                 [class.text-primary]="navState() === 'collections'"
-                [class.text-white/70]="navState() !== 'collections'"
+                [class.text-text-base/70]="navState() !== 'collections'"
                 (click)="setNav('collections', $event)"
               >Collections</a>
               <a 
                 class="hover:text-primary text-xs font-medium uppercase tracking-widest transition-colors cursor-pointer"
                 [class.text-primary]="navState() === 'new-arrivals'"
-                [class.text-white/70]="navState() !== 'new-arrivals'"
+                [class.text-text-base/70]="navState() !== 'new-arrivals'"
                 (click)="setNav('new-arrivals', $event)"
               >New Arrivals</a>
               <a 
                 class="hover:text-primary text-xs font-medium uppercase tracking-widest transition-colors cursor-pointer"
                 [class.text-primary]="navState() === 'editorial'"
-                [class.text-white/70]="navState() !== 'editorial'"
+                [class.text-text-base/70]="navState() !== 'editorial'"
                 (click)="setNav('editorial', $event)"
               >Editorial</a>
             </nav>
           </div>
           <!-- Actions -->
           <div class="flex items-center gap-6">
-            <div class="hidden lg:flex items-center bg-white/5 border border-white/10 rounded-full px-4 py-2 w-64 focus-within:border-primary/50 transition-colors">
-              <span class="material-symbols-outlined text-white/50 !text-[20px]">search</span>
-              <input class="bg-transparent border-none text-sm text-white placeholder-white/30 focus:ring-0 w-full ml-2 font-light" placeholder="Search curated items..." type="text"/>
+            <div class="hidden lg:flex items-center bg-surface-base/5 border border-surface-base/10 rounded-full px-4 py-2 w-64 focus-within:border-primary/50 transition-colors">
+              <span class="material-symbols-outlined text-text-base/50 !text-[20px]">search</span>
+              <input class="bg-transparent border-none text-sm text-text-base placeholder-text-base/30 focus:ring-0 w-full ml-2 font-light" placeholder="Search curated items..." type="text"/>
             </div>
             <div class="flex items-center gap-4">
               <button 
@@ -87,14 +86,14 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
 
       <!-- Cart Sidebar -->
       <aside 
-        class="fixed top-0 right-0 z-[110] h-full w-full max-w-md bg-surface-dark shadow-2xl transition-transform duration-500 transform"
+        class="fixed top-0 right-0 z-[110] h-full w-full max-w-md bg-surface-base shadow-2xl transition-transform duration-500 transform border-l border-surface-base/5"
         [class.translate-x-0]="isCartOpen()"
         [class.translate-x-full]="!isCartOpen()"
       >
-        <div class="flex flex-col h-full">
-          <div class="flex items-center justify-between p-6 border-b border-white/5">
-            <h2 class="text-xl font-display text-white">Your Selection</h2>
-            <button (click)="toggleCart()" class="text-white/40 hover:text-white transition-colors">
+        <div class="flex flex-col h-full text-text-base">
+          <div class="flex items-center justify-between p-6 border-b border-surface-base/5">
+            <h2 class="text-xl font-display">Your Selection</h2>
+            <button (click)="toggleCart()" class="text-text-base/40 hover:text-text-base transition-colors">
               <span class="material-symbols-outlined">close</span>
             </button>
           </div>
@@ -102,30 +101,30 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
           <div class="flex-1 overflow-y-auto p-6 no-scrollbar">
             @if (cartItems().length === 0) {
               <div class="h-full flex flex-col items-center justify-center gap-4 text-center">
-                <span class="material-symbols-outlined !text-[64px] text-white/5">shopping_bag</span>
-                <p class="text-white/40 italic">Your collection is empty.</p>
+                <span class="material-symbols-outlined !text-[64px] text-text-base/5">shopping_bag</span>
+                <p class="text-text-base/40 italic">Your collection is empty.</p>
                 <button (click)="toggleCart()" class="text-primary text-xs font-bold uppercase tracking-widest hover:underline">Start Browsing</button>
               </div>
             } @else {
               <div class="space-y-6">
                 @for (item of cartItems(); track item.id) {
                   <div class="flex gap-4 group">
-                    <div class="size-24 rounded bg-background-dark overflow-hidden flex-shrink-0">
+                    <div class="size-24 rounded bg-background-base overflow-hidden flex-shrink-0 border border-surface-base/5">
                       <img [src]="item.thumbnail" [alt]="item.title" class="w-full h-full object-cover"/>
                     </div>
                     <div class="flex-1 flex flex-col justify-center gap-1">
                       <div class="flex justify-between">
-                        <h4 class="text-white text-sm font-medium">{{ item.title }}</h4>
-                        <button (click)="removeFromCart(item.id)" class="text-white/20 hover:text-red-400 transition-colors">
+                        <h4 class="text-sm font-medium">{{ item.title }}</h4>
+                        <button (click)="removeFromCart(item.id)" class="text-text-base/20 hover:text-red-400 transition-colors">
                           <span class="material-symbols-outlined !text-[18px]">delete</span>
                         </button>
                       </div>
-                      <p class="text-white/40 text-[10px] uppercase tracking-widest font-bold">{{ item.category }}</p>
+                      <p class="text-text-base/40 text-[10px] uppercase tracking-widest font-bold">{{ item.category }}</p>
                       <div class="flex items-center justify-between mt-2">
-                        <div class="flex items-center border border-white/10 rounded overflow-hidden">
-                          <button (click)="updateQty(item.id, item.quantity - 1)" class="px-2 py-1 text-white/40 hover:bg-white/5 transition-colors">-</button>
-                          <span class="px-3 py-1 text-white text-xs">{{ item.quantity }}</span>
-                          <button (click)="updateQty(item.id, item.quantity + 1)" class="px-2 py-1 text-white/40 hover:bg-white/5 transition-colors">+</button>
+                        <div class="flex items-center border border-surface-base/10 rounded overflow-hidden">
+                          <button (click)="updateQty(item.id, item.quantity - 1)" class="px-2 py-1 text-text-base/40 hover:bg-surface-base/5 transition-colors">-</button>
+                          <span class="px-3 py-1 text-xs font-medium">{{ item.quantity }}</span>
+                          <button (click)="updateQty(item.id, item.quantity + 1)" class="px-2 py-1 text-text-base/40 hover:bg-surface-base/5 transition-colors">+</button>
                         </div>
                         <span class="text-primary font-bold text-sm">{{ item.price * item.quantity | currency }}</span>
                       </div>
@@ -137,15 +136,15 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
           </div>
 
           @if (cartItems().length > 0) {
-            <div class="p-6 bg-background-dark border-t border-white/5">
+            <div class="p-6 bg-background-base border-t border-surface-base/5">
               <div class="flex justify-between items-center mb-6">
-                <span class="text-white/40 text-sm uppercase tracking-widest">Subtotal</span>
-                <span class="text-2xl font-display text-white">{{ cartTotal() | currency }}</span>
+                <span class="text-text-base/40 text-sm uppercase tracking-widest">Subtotal</span>
+                <span class="text-2xl font-display">{{ cartTotal() | currency }}</span>
               </div>
-              <button class="w-full bg-primary text-background-dark font-bold uppercase tracking-[0.2em] py-4 rounded hover:bg-white transition-colors">
+              <button class="w-full bg-primary text-background-dark font-bold uppercase tracking-[0.2em] py-4 rounded hover:bg-text-base hover:text-background-base transition-colors shadow-lg shadow-primary/20">
                 Checkout Now
               </button>
-              <p class="text-center text-white/20 text-[10px] mt-4 uppercase tracking-widest font-medium italic">
+              <p class="text-center text-text-base/20 text-[10px] mt-4 uppercase tracking-widest font-medium italic">
                 Complimentary shipping on all luxury orders.
               </p>
             </div>
@@ -296,44 +295,43 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
         </section>
 
         <!-- Footer -->
-        <footer class="bg-background-dark border-t border-white/5 pt-16 pb-8">
-          <div class="max-w-[1440px] mx-auto px-6 lg:px-24">
+        <footer class="bg-surface-base border-t border-surface-base/5 pt-24 pb-12 px-6">
+          <div class="max-w-[1440px] mx-auto space-y-24">
             <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
               <div class="flex flex-col gap-6 max-w-xs">
                 <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-primary">diamond</span>
-                  <h3 class="text-white text-xl font-display font-bold tracking-widest">AURELIA</h3>
+                  <h3 class="text-text-base text-xl font-display font-bold tracking-widest uppercase">Aurelia</h3>
                 </div>
-                <p class="text-white/50 text-sm leading-relaxed">
+                <p class="text-text-base/50 text-sm leading-relaxed">
                   A curated sanctuary for the modern connoisseur. We believe in quality, craftsmanship, and the art of living well.
                 </p>
               </div>
               <div class="grid grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-24">
                 <div class="flex flex-col gap-4">
-                  <h4 class="text-white text-sm font-bold uppercase tracking-widest">Shop</h4>
-                  <a class="text-white/60 hover:text-primary transition-colors text-sm cursor-pointer" (click)="setNav('new-arrivals', $event)">New Arrivals</a>
-                  <a class="text-white/60 hover:text-primary transition-colors text-sm cursor-pointer" (click)="setNav('collections', $event)">Bestsellers</a>
-                  <a class="text-white/60 hover:text-primary transition-colors text-sm cursor-pointer" (click)="setCategory('Bags')">Accessories</a>
+                  <h4 class="text-text-base text-sm font-bold uppercase tracking-widest">Shop</h4>
+                  <a class="text-text-base/60 hover:text-primary transition-colors text-sm cursor-pointer" (click)="setNav('new-arrivals', $event)">New Arrivals</a>
+                  <a class="text-text-base/60 hover:text-primary transition-colors text-sm cursor-pointer" (click)="setNav('collections', $event)">Bestsellers</a>
+                  <a class="text-text-base/60 hover:text-primary transition-colors text-sm cursor-pointer" (click)="setCategory('Bags')">Accessories</a>
                 </div>
                 <div class="flex flex-col gap-4">
-                  <h4 class="text-white text-sm font-bold uppercase tracking-widest">Company</h4>
-                  <a class="text-white/60 hover:text-primary transition-colors text-sm cursor-pointer" (click)="setNav('editorial', $event)">Our Story</a>
-                  <a class="text-white/60 hover:text-primary transition-colors text-sm" href="/admin/login">Admin Portal</a>
-                  <a class="text-white/60 hover:text-primary transition-colors text-sm" href="#">Careers</a>
+                  <h4 class="text-text-base text-sm font-bold uppercase tracking-widest">Company</h4>
+                  <a class="text-text-base/60 hover:text-primary transition-colors text-sm cursor-pointer" (click)="setNav('editorial', $event)">Our Story</a>
+                  <a class="text-text-base/60 hover:text-primary transition-colors text-sm" href="/admin/login">Admin Portal</a>
+                  <a class="text-text-base/60 hover:text-primary transition-colors text-sm" href="#">Careers</a>
                 </div>
                 <div class="flex flex-col gap-4">
-                  <h4 class="text-white text-sm font-bold uppercase tracking-widest">Support</h4>
-                  <a class="text-white/60 hover:text-primary transition-colors text-sm" href="#">Contact Us</a>
-                  <a class="text-white/60 hover:text-primary transition-colors text-sm" href="#">Shipping</a>
-                  <a class="text-white/60 hover:text-primary transition-colors text-sm" href="#">Returns</a>
+                  <h4 class="text-text-base text-sm font-bold uppercase tracking-widest">Support</h4>
+                  <a class="text-text-base/60 hover:text-primary transition-colors text-sm" href="#">Contact Us</a>
+                  <a class="text-text-base/60 hover:text-primary transition-colors text-sm" href="#">Shipping</a>
+                  <a class="text-text-base/60 hover:text-primary transition-colors text-sm" href="#">Returns</a>
                 </div>
               </div>
             </div>
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-white/5 pt-8">
-              <p class="text-white/30 text-xs">© 2024 Aurelia Luxury. All rights reserved.</p>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-surface-base/5 pt-8">
+              <p class="text-text-base/30 text-xs">© 2024 Aurelia Luxury. All rights reserved.</p>
               <div class="flex gap-6">
-                <a class="text-white/30 hover:text-white transition-colors text-xs" href="#">Privacy Policy</a>
-                <a class="text-white/30 hover:text-white transition-colors text-xs" href="#">Terms of Service</a>
+                <a class="text-text-base/30 hover:text-text-base transition-colors text-xs" href="#">Privacy Policy</a>
+                <a class="text-text-base/30 hover:text-text-base transition-colors text-xs" href="#">Terms of Service</a>
               </div>
             </div>
           </div>

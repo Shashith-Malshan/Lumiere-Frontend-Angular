@@ -9,7 +9,7 @@ import { CartService } from '../../../../core/services/cart.service';
   imports: [CommonModule, CurrencyPipe],
   template: `
     <div class="group relative flex flex-col gap-4">
-      <div class="relative aspect-[3/4] w-full overflow-hidden rounded-lg bg-background-dark/50">
+      <div class="relative aspect-[3/4] w-full overflow-hidden rounded-lg bg-background-base/50 border border-surface-base/5">
         <!-- Ambient Background -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
           <img
@@ -17,7 +17,7 @@ import { CartService } from '../../../../core/services/cart.service';
             class="h-full w-full object-cover blur-3xl opacity-40 scale-150 transition-transform duration-1000 group-hover:scale-[1.7]"
             alt=""
           />
-          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-background-dark/20 to-background-dark/60"></div>
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-background-base/10 to-background-base/40"></div>
         </div>
 
         <!-- Main Image -->
@@ -48,14 +48,14 @@ import { CartService } from '../../../../core/services/cart.service';
       <!-- Info -->
       <div class="flex flex-col gap-1">
         <div class="flex justify-between items-start gap-2">
-          <h3 class="text-white text-base font-display leading-tight group-hover:text-primary transition-colors cursor-pointer line-clamp-1">
+          <h3 class="text-text-base text-base font-display leading-tight group-hover:text-primary transition-colors cursor-pointer line-clamp-1">
             {{ product.title }}
           </h3>
-          <span class="text-white font-medium text-sm">
+          <span class="text-text-base font-medium text-sm">
             {{ product.price | currency }}
           </span>
         </div>
-        <p class="text-white/40 text-[10px] font-bold uppercase tracking-widest">
+        <p class="text-text-base/40 text-[10px] font-bold uppercase tracking-widest">
           {{ product.category }}
         </p>
       </div>
