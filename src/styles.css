@@ -2,9 +2,10 @@
 
 @theme {
     --color-primary: #eebd2b;
-    --color-background-light: #f8f7f6;
-    --color-background-dark: #181611;
-    --color-surface-dark: #221d16;
+
+    --color-background-base: var(--bg);
+    --color-surface-base: var(--surface);
+    --color-text-base: var(--text);
 
     --font-display: "Playfair Display", serif;
     --font-sans: "Inter", sans-serif;
@@ -43,6 +44,19 @@
 
 :root {
     --primary: #eebd2b;
+    --bg: #f8f7f6;
+    --surface: #ffffff;
+    --text: #181611;
+    --text-muted: rgba(24, 22, 17, 0.4);
+    --border: rgba(24, 22, 17, 0.05);
+}
+
+:root.dark {
+    --bg: #181611;
+    --surface: #221d16;
+    --text: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.4);
+    --border: rgba(255, 255, 255, 0.05);
 }
 
 body {

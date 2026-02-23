@@ -2,6 +2,7 @@ import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { ProductService, Product } from '../../../../core/services/product.service';
 import { CartService, CartItem } from '../../../../core/services/cart.service';
+import { ThemeService } from '../../../../core/services/theme.service';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 
 type NavState = 'collections' | 'new-arrivals' | 'editorial';
@@ -11,15 +12,15 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
   standalone: true,
   imports: [CommonModule, ProductCardComponent, CurrencyPipe],
   template: `
-    <div class="min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-sans antialiased overflow-x-hidden">
+    <div class="min-h-screen bg-background-base text-text-base font-sans antialiased overflow-x-hidden transition-colors duration-500">
       
       <!-- Navigation -->
       <div class="fixed top-0 left-0 right-0 z-50 glass-panel transition-all duration-300">
         <header class="flex items-center justify-between px-6 py-4 max-w-[1440px] mx-auto w-full">
           <!-- Brand -->
           <div class="flex items-center gap-8">
-            <a class="flex items-center text-white group" href="#" (click)="setNav('collections', $event)">
-              <h2 class="text-white text-2xl font-display font-bold tracking-[0.05em]">AURELIA</h2>
+            <a class="flex items-center text-text-base group" href="#" (click)="setNav('collections', $event)">
+              <h2 class="text-text-base text-2xl font-display font-bold tracking-[0.05em]">AURELIA</h2>
             </a>
             <!-- Desktop Nav Links -->
             <nav class="hidden md:flex items-center gap-8 ml-8">
@@ -50,11 +51,18 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
               <input class="bg-transparent border-none text-sm text-white placeholder-white/30 focus:ring-0 w-full ml-2 font-light" placeholder="Search curated items..." type="text"/>
             </div>
             <div class="flex items-center gap-4">
-              <button class="text-white hover:text-primary transition-colors">
+              <button 
+                (click)="themeService.toggleTheme()"
+                class="text-text-base/60 hover:text-text-base transition-colors"
+                title="Toggle Theme"
+              >
+                <span class="material-symbols-outlined">{{ themeService.theme() === 'light' ? 'dark_mode' : 'light_mode' }}</span>
+              </button>
+              <button class="text-text-base hover:text-primary transition-colors">
                 <span class="material-symbols-outlined">favorite</span>
               </button>
               <button 
-                class="relative flex items-center gap-2 text-white hover:text-primary transition-colors group"
+                class="relative flex items-center gap-2 text-text-base hover:text-primary transition-colors group"
                 (click)="toggleCart()"
               >
                 <span class="material-symbols-outlined">shopping_bag</span>
@@ -350,6 +358,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
 export class ProductGalleryComponent implements OnInit {
   private productService = inject(ProductService);
   private cartService = inject(CartService);
+  public themeService = inject(ThemeService);
 
   products = signal<Product[]>([]);
   isLoading = signal<boolean>(true);
