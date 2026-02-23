@@ -195,7 +195,7 @@ export class AdminDashboardComponent implements OnInit {
   categories = [
     'mens-shirts', 'womens-dresses', 'tops', 'womens-shoes',
     'mens-shoes', 'womens-bags', 'sunglasses', 'mens-watches',
-    'womens-watches', 'womens-jewellery', 'fragrances'
+    'womens-watches', 'womens-jewellery', 'Bags'
   ];
 
   newProduct: Partial<Product> = {

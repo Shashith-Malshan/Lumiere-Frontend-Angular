@@ -401,7 +401,7 @@ export class ProductGalleryComponent implements OnInit {
   private categoryMap: Record<string, string[]> = {
     'Apparel': ['mens-shirts', 'womens-dresses', 'tops'],
     'Shoes': ['womens-shoes', 'mens-shoes'],
-    'Bags': ['Bags'],
+    'Bags': ['Bags', 'womens-bags'],
     'Accessories': ['sunglasses', 'mens-watches', 'womens-watches', 'womens-jewellery']
   };
 
