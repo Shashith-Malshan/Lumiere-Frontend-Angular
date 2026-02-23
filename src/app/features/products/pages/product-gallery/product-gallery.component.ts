@@ -159,20 +159,20 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
           <section class="relative h-[85vh] w-full overflow-hidden">
             <div class="absolute inset-0 z-0">
               <img alt="Collection" class="h-full w-full object-cover object-center opacity-70" src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/30 to-transparent"></div>
-              <div class="absolute inset-0 bg-gradient-to-r from-background-dark/60 via-transparent to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-background-base via-background-base/30 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-background-base/60 via-transparent to-transparent"></div>
             </div>
             <div class="relative z-10 flex h-full flex-col justify-center px-6 md:px-12 lg:px-24 max-w-[1440px] mx-auto">
               <div class="max-w-2xl animate-fade-in-up">
                 <span class="text-primary text-sm font-bold uppercase tracking-[0.2em] mb-4 block">New Season 2024</span>
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-medium text-white leading-[1.1] mb-6">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-medium text-text-base leading-[1.1] mb-6">
                   {{ navState() === 'new-arrivals' ? 'Fresh' : 'Divine' }} <br/>
-                  <span class="italic text-white/90 font-light">{{ navState() === 'new-arrivals' ? 'arrivals' : 'Elegance' }}</span>
+                  <span class="italic text-text-base/90 font-light">{{ navState() === 'new-arrivals' ? 'arrivals' : 'Elegance' }}</span>
                 </h1>
-                <p class="text-lg md:text-xl text-white/70 font-light max-w-md mb-10 leading-relaxed">
+                <p class="text-lg md:text-xl text-text-base/70 font-light max-w-md mb-10 leading-relaxed">
                   Experience the pinnacle of fashion artistry. Curated for those who command presence and celebrate sophistication.
                 </p>
-                <button (click)="setNav('collections', $event)" class="group relative px-8 py-4 overflow-hidden rounded-none bg-transparent text-white border border-white/30 hover:border-primary transition-colors duration-300">
+                <button (click)="setNav('collections', $event)" class="group relative px-8 py-4 overflow-hidden rounded-none bg-transparent text-text-base border border-text-base/30 hover:border-primary transition-colors duration-300">
                   <div class="absolute inset-0 w-0 bg-primary transition-all duration-[250ms] ease-out group-hover:w-full opacity-10"></div>
                   <span class="relative flex items-center gap-3 text-sm font-bold uppercase tracking-widest">
                     Explore Selection
@@ -189,17 +189,17 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
           <section class="relative min-h-[85vh] flex items-center justify-center p-6 md:p-12 lg:p-24 overflow-hidden">
           <div class="max-w-4xl text-center animate-fade-in-up">
              <span class="text-primary text-sm font-bold uppercase tracking-[0.3em] mb-8 block">Exclusive Editorial</span>
-             <h2 class="text-5xl md:text-7xl font-display text-white mb-12 italic leading-tight">The Modern Muse</h2>
+             <h2 class="text-text-base text-5xl md:text-7xl font-display mb-12 italic leading-tight uppercase">The Modern Muse</h2>
              <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
-                <p class="text-white/60 text-lg leading-relaxed font-light">
+                <p class="text-text-base/60 text-lg leading-relaxed font-light">
                   A deep dive into the silhouettes of tomorrow. Our latest editorial explores the intersection of traditional craftsmanship and avant-garde design, featuring pieces that redefine contemporary luxury.
                 </p>
-                <p class="text-white/60 text-lg leading-relaxed font-light">
-                  Captured in the heart of Milan, these visuals speak to the soul of the collection—refined, daring, and unapologetically elegant. Discover the story behind the stitches.
+                <p class="text-text-base/60 text-lg leading-relaxed font-light">
+                  Captured in the heart of Milan, these visuals speak to the soul of the collection — refined, daring, and unapologetically elegant. Discover the story behind the stitches.
                 </p>
              </div>
-             <button (click)="setNav('collections', $event)" class="mt-16 text-primary border-b border-primary pb-2 text-sm font-bold uppercase tracking-widest hover:text-white hover:border-white transition-all">
-                Discover the story pieces
+             <button (click)="setNav('collections', $event)" class="mt-16 text-primary border-b border-primary pb-2 text-sm font-bold uppercase tracking-widest hover:text-text-base hover:border-text-base transition-all">
+                The Heritage Collection
              </button>
           </div>
           <!-- Background accent -->
@@ -283,11 +283,11 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
         <section class="py-24 bg-surface-dark border-t border-white/5">
           <div class="max-w-4xl mx-auto px-6 text-center">
             <span class="material-symbols-outlined !text-[48px] text-primary mb-6">mark_email_read</span>
-            <h2 class="text-3xl md:text-5xl font-display text-white mb-4">Join the Inner Circle</h2>
-            <p class="text-white/60 mb-8 max-w-lg mx-auto">Subscribe to receive updates, access to exclusive deals, and more.</p>
+            <h2 class="text-3xl md:text-5xl font-display text-text-base mb-4">Join the Inner Circle</h2>
+            <p class="text-text-base/60 mb-8 max-w-lg mx-auto">Subscribe to receive updates, access to exclusive deals, and more.</p>
             <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input class="flex-1 bg-background-dark border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:ring-0" placeholder="Enter your email" type="email"/>
-              <button class="bg-primary text-background-dark px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-white transition-colors">
+              <input class="flex-1 bg-surface-base/5 border border-surface-base/10 rounded-lg px-4 py-3 text-text-base placeholder-text-base/30 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Enter your email" type="email"/>
+              <button class="bg-primary text-background-dark px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-text-base hover:text-background-base transition-colors shadow-lg shadow-primary/20">
                 Subscribe
               </button>
             </form>
