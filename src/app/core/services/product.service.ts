@@ -29,7 +29,7 @@ export interface ProductResponse {
 export class ProductService {
     private http = inject(HttpClient);
     private apiUrl = 'https://dummyjson.com/products/category';
-    private categories = ['mens-shirts', 'womens-dresses', 'tops', 'womens-shoes', 'mens-shoes', 'womens-bags', 'sunglasses', 'mens-watches', 'womens-watches', 'womens-jewellery'];
+    private categories = ['mens-shirts', 'womens-dresses', 'tops', 'womens-shoes', 'mens-shoes', 'womens-bags', 'sunglasses', 'mens-watches', 'womens-watches', 'womens-jewellery', 'fragrances'];
 
     getProducts(): Observable<Product[]> {
         // Fetch all products and filter for fashion categories to get a diverse set
