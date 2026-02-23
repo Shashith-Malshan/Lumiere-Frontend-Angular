@@ -310,8 +310,8 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
                 <div class="flex flex-col gap-4">
                   <h4 class="text-white text-sm font-bold uppercase tracking-widest">Company</h4>
                   <a class="text-white/60 hover:text-primary transition-colors text-sm cursor-pointer" (click)="setNav('editorial', $event)">Our Story</a>
+                  <a class="text-white/60 hover:text-primary transition-colors text-sm" href="/admin/login">Admin Portal</a>
                   <a class="text-white/60 hover:text-primary transition-colors text-sm" href="#">Careers</a>
-                  <a class="text-white/60 hover:text-primary transition-colors text-sm" href="#">Press</a>
                 </div>
                 <div class="flex flex-col gap-4">
                   <h4 class="text-white text-sm font-bold uppercase tracking-widest">Support</h4>
