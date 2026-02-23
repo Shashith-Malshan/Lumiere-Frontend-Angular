@@ -423,10 +423,10 @@ export class ProductGalleryComponent implements OnInit {
   }
 
   private readonly BAG_ASSETS = [
-    { title: 'Signature Leather Tote', image: 'https://images.unsplash.com/photo-1584917033904-493bb3c39371?q=80&w=1000' },
+    { title: 'Signature Leather Tote', image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=1000' },
     { title: 'Classic Quilted Flap', image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=1000' },
     { title: 'Minimalist Bucket Bag', image: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?q=80&w=1000' },
-    { title: 'Structured Top Handle', image: 'https://images.unsplash.com/photo-1566150905458-1bf1fd113961?q=80&w=1000' },
+    { title: 'Structured Top Handle', image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?q=80&w=1000' },
     { title: 'Velvet Evening Clutch', image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1000' }
   ];
 
