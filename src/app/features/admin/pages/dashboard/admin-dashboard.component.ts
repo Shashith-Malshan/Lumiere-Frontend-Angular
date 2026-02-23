@@ -32,7 +32,7 @@ import { ProductService, Product } from '../../../../core/services/product.servi
           </div>
           <button 
             (click)="showAddForm.set(true)"
-            class="bg-primary text-background-dark font-bold text-xs uppercase tracking-widest px-8 py-4 rounded hover:scale-105 transition-transform shadow-xl shadow-primary/20"
+            class="bg-primary text-background-base font-bold text-xs uppercase tracking-widest px-8 py-4 rounded hover:scale-105 transition-transform shadow-xl shadow-primary/20"
           >
             Add New Item
           </button>
@@ -155,7 +155,7 @@ import { ProductService, Product } from '../../../../core/services/product.servi
   styles: [`
     :host { display: block; }
     .glass-panel {
-      background: rgba(24, 22, 17, 0.7);
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
       backdrop-filter: blur(20px);
     }
     @keyframes scaleIn {

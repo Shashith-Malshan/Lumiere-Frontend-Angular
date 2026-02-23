@@ -67,7 +67,7 @@ import { Router } from '@angular/router';
   styles: [`
     :host { display: block; }
     .glass-panel {
-      background: rgba(24, 22, 17, 0.7);
+      background: color-mix(in srgb, var(--bg) 70%, transparent);
       backdrop-filter: blur(20px);
     }
   `]

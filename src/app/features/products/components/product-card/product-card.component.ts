@@ -29,7 +29,7 @@ import { CartService } from '../../../../core/services/cart.service';
         
         <!-- Badge -->
         <div *ngIf="product.discountPercentage > 10" class="absolute top-4 left-4 z-20">
-          <span class="px-2 py-1 bg-primary text-background-dark text-[10px] uppercase font-bold tracking-widest rounded-sm">
+          <span class="px-2 py-1 bg-primary text-background-base text-[10px] uppercase font-bold tracking-widest rounded-sm">
             -{{ product.discountPercentage | number:'1.0-0' }}%
           </span>
         </div>
@@ -38,7 +38,7 @@ import { CartService } from '../../../../core/services/cart.service';
         <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-30">
           <button 
             (click)="addToCart($event)"
-            class="translate-y-4 group-hover:translate-y-0 transition-all duration-300 bg-white text-background-dark font-bold text-xs uppercase tracking-widest px-6 py-3 rounded hover:bg-primary shadow-lg hover:shadow-primary/50"
+            class="translate-y-4 group-hover:translate-y-0 transition-all duration-300 bg-primary text-background-base font-bold text-xs uppercase tracking-widest px-6 py-3 rounded hover:bg-text-base hover:text-background-base shadow-lg shadow-primary/20"
           >
             Add to Cart
           </button>

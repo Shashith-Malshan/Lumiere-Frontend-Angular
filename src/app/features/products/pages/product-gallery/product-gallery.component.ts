@@ -141,7 +141,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
                 <span class="text-text-base/40 text-sm uppercase tracking-widest">Subtotal</span>
                 <span class="text-2xl font-display">{{ cartTotal() | currency }}</span>
               </div>
-              <button class="w-full bg-primary text-background-dark font-bold uppercase tracking-[0.2em] py-4 rounded hover:bg-text-base hover:text-background-base transition-colors shadow-lg shadow-primary/20">
+              <button class="w-full bg-primary text-background-base font-bold uppercase tracking-[0.2em] py-4 rounded hover:bg-text-base hover:text-background-base transition-colors shadow-lg shadow-primary/20">
                 Checkout Now
               </button>
               <p class="text-center text-text-base/20 text-[10px] mt-4 uppercase tracking-widest font-medium italic">
@@ -287,7 +287,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
             <p class="text-text-base/60 mb-8 max-w-lg mx-auto">Subscribe to receive updates, access to exclusive deals, and more.</p>
             <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input class="flex-1 bg-surface-base/5 border border-surface-base/10 rounded-lg px-4 py-3 text-text-base placeholder-text-base/30 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Enter your email" type="email"/>
-              <button class="bg-primary text-background-dark px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-text-base hover:text-background-base transition-colors shadow-lg shadow-primary/20">
+              <button class="bg-primary text-background-base px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-text-base hover:text-background-base transition-colors shadow-lg shadow-primary/20">
                 Subscribe
               </button>
             </form>
