@@ -4,15 +4,19 @@ import { ProductService, Product } from '../../../../core/services/product.servi
 import { CartService, CartItem } from '../../../../core/services/cart.service';
 import { ThemeService } from '../../../../core/services/theme.service';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
+import { SnowfallComponent } from '../../../../shared/components/snowfall/snowfall.component';
 
 type NavState = 'collections' | 'new-arrivals' | 'editorial';
 
 @Component({
   selector: 'app-product-gallery',
   standalone: true,
-  imports: [CommonModule, ProductCardComponent, CurrencyPipe],
+  imports: [CommonModule, ProductCardComponent, CurrencyPipe, SnowfallComponent],
   template: `
     <div class="min-h-screen bg-background-base text-text-base font-sans antialiased overflow-x-hidden transition-colors duration-500">
+      
+      <!-- Snowfall Effect -->
+      <app-snowfall *ngIf="themeService.isChristmasMode()"></app-snowfall>
       
       <!-- Navigation -->
       <div class="fixed top-0 left-0 right-0 z-50 glass-panel transition-all duration-300">
@@ -166,8 +170,8 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
               <div class="max-w-2xl animate-fade-in-up">
                 <span class="text-primary text-sm font-bold uppercase tracking-[0.2em] mb-4 block">New Season 2024</span>
                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-medium text-text-base leading-[1.1] mb-6">
-                  {{ navState() === 'new-arrivals' ? 'Fresh' : 'Divine' }} <br/>
-                  <span class="italic text-text-base/90 font-light">{{ navState() === 'new-arrivals' ? 'arrivals' : 'Elegance' }}</span>
+                  {{ themeService.isChristmasMode() ? 'Festive' : (navState() === 'new-arrivals' ? 'Fresh' : 'Divine') }} <br/>
+                  <span class="italic text-text-base/90 font-light">{{ themeService.isChristmasMode() ? 'Magic' : (navState() === 'new-arrivals' ? 'arrivals' : 'Elegance') }}</span>
                 </h1>
                 <p class="text-lg md:text-xl text-text-base/70 font-light max-w-md mb-10 leading-relaxed">
                   Experience the pinnacle of fashion artistry. Curated for those who command presence and celebrate sophistication.
@@ -182,6 +186,29 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
               </div>
             </div>
           </section>
+
+          <!-- Christmas Promotion Banner -->
+          <div *ngIf="themeService.isChristmasMode()" class="bg-primary text-background-base py-4 overflow-hidden relative group">
+            <div class="flex items-center gap-12 whitespace-nowrap animate-marquee">
+              <span class="text-xs font-bold uppercase tracking-[0.3em] flex items-center gap-2">
+                <span class="material-symbols-outlined !text-[14px]">celebration</span>
+                Festive Season Sale: Up to 40% Off Selected Pieces
+              </span>
+              <span class="text-xs font-bold uppercase tracking-[0.3em] flex items-center gap-2">
+                <span class="material-symbols-outlined !text-[14px]">ac_unit</span>
+                Complimentary Holiday Wrapping on All Orders
+              </span>
+              <span class="text-xs font-bold uppercase tracking-[0.3em] flex items-center gap-2">
+                <span class="material-symbols-outlined !text-[14px]">card_giftcard</span>
+                Double Loyalty Points for Inner Circle Members
+              </span>
+              <!-- Repeat for seamless loop -->
+              <span class="text-xs font-bold uppercase tracking-[0.3em] flex items-center gap-2">
+                <span class="material-symbols-outlined !text-[14px]">celebration</span>
+                Festive Season Sale: Up to 40% Off Selected Pieces
+              </span>
+            </div>
+          </div>
         }
 
         <!-- Editorial Section -->

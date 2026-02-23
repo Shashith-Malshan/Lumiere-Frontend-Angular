@@ -3,6 +3,7 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductService, Product } from '../../../../core/services/product.service';
+import { ThemeService } from '../../../../core/services/theme.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -17,6 +18,17 @@ import { ProductService, Product } from '../../../../core/services/product.servi
             <h1 class="text-xl font-display font-bold tracking-wider">AURELIA <span class="text-[10px] text-primary ml-2 uppercase tracking-[0.2em] font-sans">Admin</span></h1>
           </div>
           <div class="flex items-center gap-6">
+            <!-- Seasonal Toggle -->
+            <button 
+              (click)="themeService.toggleChristmasMode()" 
+              class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-surface-base/10 hover:border-primary transition-all group"
+              [class.bg-primary/10]="themeService.isChristmasMode()"
+              [class.border-primary]="themeService.isChristmasMode()"
+            >
+              <span class="material-symbols-outlined !text-[16px] transition-transform group-hover:rotate-12" [class.text-primary]="themeService.isChristmasMode()">park</span>
+              <span class="text-[9px] font-bold uppercase tracking-widest">{{ themeService.isChristmasMode() ? 'Christmas Active' : 'Activate Season' }}</span>
+            </button>
+
             <button (click)="logout()" class="text-text-base/40 hover:text-text-base text-[10px] font-bold uppercase tracking-widest transition-colors">Logout</button>
             <a href="/" class="bg-surface-base/5 border border-surface-base/10 px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest hover:border-primary transition-colors">Storefront</a>
           </div>
@@ -170,6 +182,7 @@ import { ProductService, Product } from '../../../../core/services/product.servi
 export class AdminDashboardComponent implements OnInit {
   private productService = inject(ProductService);
   private router = inject(Router);
+  themeService = inject(ThemeService);
 
   products = signal<Product[]>([]);
   searchQuery = '';

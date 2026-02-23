@@ -2,6 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Product } from '../../../../core/services/product.service';
 import { CartService } from '../../../../core/services/cart.service';
+import { ThemeService } from '../../../../core/services/theme.service';
 
 @Component({
   selector: 'app-product-card',
@@ -26,6 +27,16 @@ import { CartService } from '../../../../core/services/cart.service';
           [alt]="product.title"
           class="relative h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 z-10"
         />
+
+        <!-- Christmas Decorations -->
+        <ng-container *ngIf="themeService.isChristmasMode()">
+          <!-- Snow Cap -->
+          <div class="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white/80 to-transparent z-20 pointer-events-none"></div>
+          <!-- Holly Icon -->
+          <div class="absolute top-2 right-2 z-20 animate-bounce cursor-default" title="Festive Edition">
+            <span class="material-symbols-outlined text-primary !text-[18px]">park</span>
+          </div>
+        </ng-container>
         
         <!-- Badge -->
         <div *ngIf="product.discountPercentage > 10" class="absolute top-4 left-4 z-20">
@@ -70,6 +81,7 @@ import { CartService } from '../../../../core/services/cart.service';
 export class ProductCardComponent {
   @Input({ required: true }) product!: Product;
   private cartService = inject(CartService);
+  themeService = inject(ThemeService);
 
   addToCart(event: Event) {
     event.stopPropagation();
