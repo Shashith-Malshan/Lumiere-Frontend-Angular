@@ -382,8 +382,9 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
 
       </main>
     </div>
-  `,
-  export class ProductGalleryComponent implements OnInit {
+  `
+})
+export class ProductGalleryComponent implements OnInit {
   private productService = inject(ProductService);
   private cartService = inject(CartService);
   public themeService = inject(ThemeService);
@@ -401,7 +402,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
   cartCount = this.cartService.count;
   cartTotal = this.cartService.total;
 
-  UI_CATEGORIES =['All Items', 'Apparel', 'Shoes', 'Bags', 'Accessories'];
+  UI_CATEGORIES = ['All Items', 'Apparel', 'Shoes', 'Bags', 'Accessories'];
 
   private categoryMap: Record<string, string[]> = {
     'Apparel': ['mens-shirts', 'womens-dresses', 'tops'],
@@ -481,7 +482,7 @@ type NavState = 'collections' | 'new-arrivals' | 'editorial';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  private readonly BAG_ASSETS =[
+  private readonly BAG_ASSETS = [
     { title: 'Signature Leather Tote', image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=1000' },
     { title: 'Classic Quilted Flap', image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=1000' },
     { title: 'Minimalist Bucket Bag', image: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?q=80&w=1000' },
